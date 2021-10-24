@@ -1,0 +1,31 @@
+---
+
+percona_download_dir: '/downloads'
+percona_mysql_python_packages:
+  - MySQL-python
+percona_download_url_base: https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.22-22/binary/redhat/7/x86_64/
+percona_install_packages:
+  - Percona-Server-shared-compat-57-5.7.22-22.1.el7.x86_64.rpm
+  - Percona-Server-shared-57-5.7.22-22.1.el7.x86_64.rpm
+  - Percona-Server-client-57-5.7.22-22.1.el7.x86_64.rpm
+  - Percona-Server-server-57-5.7.22-22.1.el7.x86_64.rpm
+
+percona_db_configure: true
+
+# Use on the first run to override the recommended auto-generation of root password.
+# Password is stored to ~/.my.cnf
+#mysql_root_password: "not_recommended"
+
+# Use to create a default app database.
+#mysql_app_db: "app_name"
+# Use to create a user for interacting with app database.
+#mysql_app_user: "app_username"
+# By default, ALL privileges are given to the app user against the app database. It can be modified here.
+#mysql_app_privileges: "{{ mysql_app_db }}.*:ALL"
+
+# Use on the first run to override the recommended auto-generation of app password.
+# Password is stored to {{ ansible_user_dir }}/.my.cnf
+#mysql_app_password: "not_recommended"
+
+# Use to generate a custom my.cnf
+#mysql_config_template_file: my.cnf.j2

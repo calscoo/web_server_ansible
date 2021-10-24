@@ -1,0 +1,38 @@
+---
+
+# This is so the Ansible MySQL modules will work
+- name: Install the Python MySQL module
+  yum:
+    name: "{{ percona_mysql_python_packages }}"
+    state: present
+
+- name: Ensure existence of download directory
+  file:
+    path: "{{ percona_download_dir }}"
+    state: directory
+
+- name: Download Percona install packages
+  get_url:
+    url: "{{percona_download_url_base}}{{ item }}"
+    dest: "{{ percona_download_dir }}/{{ item }}"
+  with_items: "{{ percona_install_packages }}"
+
+- name: Install extracted Percona RPMs
+  yum:
+    name: "{{ percona_install_packages | map('regex_replace', '(.*)', percona_download_dir + '/\\1') | list }}"
+    state: present
+
+- name: Write custom server configuration
+  template:
+    src: "{{ mysql_config_template_file }}"
+    dest: /etc/my.cnf
+    owner: root
+    mode: 0644
+    backup: yes
+  when:
+    - mysql_config_template_file is defined
+    - mysql_config_template_file | length
+  notify: restart mysql
+
+- include: configure.yml
+  when: percona_db_configure

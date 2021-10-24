@@ -1,0 +1,12 @@
+---
+
+certbot_home_dir: /etc/letsencrypt/
+certbot_server_name: "{{ server_name }}"
+certbot_contact_email: "{{ contact_email }}"
+certbot_create_command: "certbot certonly --standalone --noninteractive --agree-tos -d {{ certbot_server_name }} --email {{ certbot_contact_email }}"
+web_service: nginx
+certbot_auto_renew_minute: '17'
+certbot_auto_renew_hour: '3'
+certbot_auto_renew_webroot: "/usr/local/{{ web_service }}/{{ certbot_server_name }}/html"
+certbot_auto_renew_webserver_reload_command: "systemctl reload {{ web_service }}"
+certbot_auto_renew_command: "certbot certonly --webroot --debug -d {{ certbot_server_name }} --webroot-path {{ certbot_auto_renew_webroot }} --agree-tos -m {{ certbot_contact_email }} -n && {{ certbot_auto_renew_webserver_reload_command }}"

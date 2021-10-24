@@ -1,0 +1,4 @@
+
+nginx_server_name: "{{ server_name }}"
+nginx_web_dir: "/usr/local/nginx/{{ nginx_server_name }}/html/"
+nginx_conf_dir: "/etc/nginx/nginx.conf"

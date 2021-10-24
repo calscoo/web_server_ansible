@@ -1,0 +1,90 @@
+#{{ ansible_managed }}
+# The following options will be passed to all MySQL clients
+[client]
+port = 3306
+socket = {{ percona_data_dir }}/mysql.sock
+
+# The MySQL server
+[mysqld]
+open_files_limit = 131070
+socket = {{ percona_data_dir }}/mysql.sock
+datadir = {{ percona_data_dir }}/data
+transaction_isolation = READ-COMMITTED
+binlog_format = ROW
+table_open_cache = 114686
+table_definition_cache = 114686
+query_cache_type = 0
+query_cache_size = 0
+max_connections = 1000
+max_allowed_packet = 4M
+sort_buffer_size = 6M
+join_buffer_size = 2M
+read_rnd_buffer_size = 6M
+lower_case_table_names = 1
+thread_cache_size = 32
+pid-file = {{ percona_data_dir }}/mysql.pid
+group_concat_max_len = 100000
+tmpdir = {{ percona_data_dir }}/tmp
+explicit_defaults_for_timestamp = 1
+performance_schema = OFF
+metadata_locks_hash_instances=256
+max_connect_errors=1000000
+skip_name_resolve=ON
+back_log=500
+table_open_cache_instances=16
+
+# Replication
+server_id = 1
+replicate_same_server_id = 0
+auto_increment_increment = 1
+auto_increment_offset = 1
+log_slave_updates = OFF
+slave_compressed_protocol = ON
+binlog_checksum = NONE
+log_bin_use_v1_row_events = 1
+
+# Replication Logging
+expire_logs_days = 5
+log_bin = {{ percona_data_dir }}/logs/binary
+relay_log = {{ percona_data_dir }}/logs/relay
+
+# Logs
+log_error = {{ percona_data_dir }}/error.log
+slow_query_log = 1
+slow_query_log_file = {{ percona_data_dir }}/slow.log
+long_query_time = 5
+
+# InnoDB
+innodb_open_files = 122878
+innodb_data_home_dir = {{ percona_data_dir }}/data
+innodb_data_file_path = innodb_data:100M:autoextend
+innodb_file_per_table = 1
+innodb_log_group_home_dir = {{ percona_data_dir }}/logs
+innodb_log_files_in_group = 3
+innodb_log_file_size = 1G
+innodb_buffer_pool_size = {{ innodb_buffer_pool_size }}
+innodb_log_buffer_size = 16M
+innodb_flush_method = O_DIRECT
+innodb_flush_log_at_trx_commit = 2
+innodb_buffer_pool_instances    = 4
+innodb_adaptive_flushing        = 1
+innodb_max_dirty_pages_pct      = 50
+innodb_io_capacity              = 500
+innodb_thread_concurrency       = 32
+innodb_flush_neighbors        = 0
+innodb_purge_threads        = 2
+innodb_buffer_pool_dump_at_shutdown = ON
+innodb_file_format=Barracuda
+innodb_checksum_algorithm = crc32
+innodb_thread_sleep_delay = 0
+innodb_adaptive_max_sleep_delay = 10000
+
+[mysqldump]
+quick
+max_allowed_packet = 20M
+
+[mysql]
+no-auto-rehash
+
+[mysqlhotcopy]
+interactive-timeout

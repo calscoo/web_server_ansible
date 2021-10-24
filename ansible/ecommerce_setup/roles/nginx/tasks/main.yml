@@ -1,0 +1,30 @@
+---
+- name: Install nginx
+  yum:
+    name: nginx
+    state: present
+
+- name: Copy nginx configuration for ecommerce
+  template:
+    src: "nginx.conf.j2"
+    dest: "{{ nginx_conf_dir }}"
+  notify: restart nginx
+
+- name: Create nginx web directory
+  file:
+    path: "{{ nginx_web_dir }}"
+    state: directory
+
+- name: Copy UI over
+  copy:
+    src: html.zip
+    dest: /tmp
+  notify: restart nginx
+
+- name: Unarchive UI
+  unarchive:
+    src: /tmp/html.zip
+    dest: "{{ nginx_web_dir }}"
+    remote_src: yes
+    mode: 0755
+  notify: restart nginx

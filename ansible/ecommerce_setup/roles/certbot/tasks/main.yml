@@ -1,0 +1,49 @@
+---
+
+- name: Install certbot
+  yum:
+    name: certbot
+    state: present
+
+- name: Check if certificate already exists.
+  stat:
+    path: "/etc/letsencrypt/live/{{ certbot_server_name }}/cert.pem"
+  register: letsencrypt_cert
+
+- name: Check if webserer is running
+  shell: 'systemctl is-active --quiet {{ web_service }}'
+  register: _svc_webserver
+  failed_when: false
+  changed_when: false
+
+- name: Disable webserver for new cert generation, if necessary
+  service:
+    name: '{{ web_service }}'
+    state: stopped
+  when:
+    - not letsencrypt_cert.stat.exists
+    - _svc_webserver.rc == 0
+
+- name: Create nginx web directory
+  file:
+    path: "{{ certbot_auto_renew_webroot }}"
+    state: directory
+
+- name: Generate new certificate if one doesn't exist.
+  command: "{{ certbot_create_command }}"
+  when: not letsencrypt_cert.stat.exists
+
+- name: Restart webserver for after new cert generation
+  service:
+    name: '{{ web_service }}'
+    state: started
+  when:
+    - not letsencrypt_cert.stat.exists
+    - _svc_webserver.rc == 0
+
+- name: Add cron job for certbot renewal
+  cron:
+    name: Certbot automatic renewal
+    job: "{{ certbot_auto_renew_command }}"
+    minute: "{{ certbot_auto_renew_minute }}"
+    hour: "{{ certbot_auto_renew_hour }}"

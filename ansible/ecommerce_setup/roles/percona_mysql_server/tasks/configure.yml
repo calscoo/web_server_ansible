@@ -1,0 +1,101 @@
+---
+
+##############################################
+#                                            #
+#  Create MySQL directories and permissions  #
+#                                            #
+##############################################
+
+- name: Initialize mysql
+  command: mysqld --initialize-insecure --user=mysql
+  args:
+    creates: /var/lib/mysql/mysql
+
+- name: Start mysql-server and set to start on boot
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  become_user: root
+
+########################################
+#                                      #
+#      Prepare Database and Users      #
+#                                      #
+########################################
+
+- name: Check whether root auth is enabled
+  mysql_info:
+    login_user: root
+    login_password: ""
+    login_host: localhost
+    filter: version
+  failed_when: false
+  register: mysql_no_auth_check
+
+- name: Generate new password
+  set_fact:
+    mysql_root_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
+  when:
+    - mysql_no_auth_check.version is defined
+    - mysql_root_password is not defined or mysql_root_password | length == 0
+
+- name: Create root user config file
+  template:
+    src: root_my.cnf.j2
+    dest: "~/.my.cnf"
+    mode: 0640
+  when: mysql_no_auth_check.version is defined
+
+- name: Grab mysql password from target
+  shell: "grep '^password' < ~/.my.cnf | sed 's/^password=//'"
+  changed_when: false
+  register: mysql_root_password_lookup
+
+- name: Parse output
+  set_fact:
+    mysql_root_password: "{{ mysql_root_password_lookup.stdout }}"
+
+- name: Update root accounts (no password)
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host_all: yes
+    login_user: root
+    login_password: ""
+    login_host: localhost
+  no_log: true
+  when: mysql_no_auth_check.version is defined
+
+- name: Update root accounts (with password)
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host_all: yes
+    login_host: localhost
+  no_log: true
+
+- name: Drop anonymous accounts
+  mysql_user:
+    name: ''
+    host_all: yes
+    login_host: localhost
+    state: absent
+  no_log: true
+
+- name: Drop test database
+  mysql_db:
+    name: test
+    state: absent
+    login_host: localhost
+  no_log: true
+
+- name: Setup app database
+  mysql_db:
+    name: "{{ mysql_app_db }}"
+    state: present
+    login_host: localhost
+  no_log: true
+  when:
+    - mysql_app_db is defined
+    - mysql_app_db | length
