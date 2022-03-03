@@ -1,7 +1,0 @@
----
-- name: restart mysql
-  service:
-    name: mysql
-    state: restarted
-  become: yes
-  when: percona_db_configure

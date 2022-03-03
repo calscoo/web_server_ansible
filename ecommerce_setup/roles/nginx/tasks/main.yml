@@ -17,14 +17,13 @@
 
 - name: Copy UI over
   copy:
-    src: html.zip
-    dest: /tmp
+    src: index.html
+    dest: "{{ nginx_web_dir }}"
   notify: restart nginx
 
-- name: Unarchive UI
-  unarchive:
-    src: /tmp/html.zip
-    dest: "{{ nginx_web_dir }}"
-    remote_src: yes
-    mode: 0755
-  notify: restart nginx
+#- name: Unarchive UI
+#  unarchive:
+#    src: html.zip
+#    dest: "{{ nginx_web_dir }}"
+#    mode: 0755
+#  notify: restart nginx
