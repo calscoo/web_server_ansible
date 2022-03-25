@@ -1,8 +1,7 @@
 ---
+
 - hosts: ecommerce
-#  vars:
-#    mysql_app_db: "ecommerce_database"
   roles:
-    - { role: dependencies, tags: dependencies }
+    - { role: dependencies, become: yes, tags: dependencies }
     - { role: certbot, become: yes, tags: certbot }
     - { role: nginx, become: yes, tags: nginx }
