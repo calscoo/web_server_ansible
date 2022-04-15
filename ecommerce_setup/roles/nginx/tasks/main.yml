@@ -12,15 +12,8 @@
 
 - name: Create empty nginx web directory
   file:
-    path: "{{ nginx_web_dir }}"
+    path: "{{ web_dir }}"
     state: "{{ item }}"
   with_items:
     - absent
-    - directory
-
-- name: Place prod UI
-  unarchive:
-    src: html.zip
-    dest: "{{ nginx_web_dir }}"
-    mode: 0755
-  notify: restart nginx
+    - director

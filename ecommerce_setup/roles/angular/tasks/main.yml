@@ -1,0 +1,4 @@
+---
+
+- name: Install Angular cli globally
+  shell: "npm install -g @angular/cli@11.2.14"

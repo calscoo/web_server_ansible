@@ -3,5 +3,8 @@
 - hosts: ecommerce
   roles:
     - { role: dependencies, become: yes, tags: dependencies }
+    - { role: node, become: yes, tags: node }
+    - { role: angular, become: yes, tags: angular }
     - { role: certbot, become: yes, tags: certbot }
     - { role: nginx, become: yes, tags: nginx }
+    - { role: build, become: yes, tags: build }

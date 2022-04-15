@@ -1,0 +1,6 @@
+---
+
+repo: "https://github.com/calscoo/ecommerce_angular.git"
+repo_dir: "ecommerce_angular"
+artifact_build_dir: "{{ repo_dir }}/dist/browser/"
+

@@ -18,6 +18,7 @@
       - nano
       - epel-release
       - yum-utils
+      - git
     state: present
   become: yes
 

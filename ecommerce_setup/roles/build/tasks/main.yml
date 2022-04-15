@@ -1,0 +1,27 @@
+---
+
+- name: Git checkout
+  ansible.builtin.git:
+    repo: "{{ repo }}"
+    dest: "{{ repo_dir }}"
+    version: main
+    force: yes
+  tags: checkout
+
+- name: install project dependencies
+  shell: "cd {{ repo_dir }} && npm install --force"
+
+- name: build production artifacts
+  shell: "cd {{ repo_dir }} && ng build --prod"
+
+- name: Create empty nginx web directory
+  file:
+    path: "{{ web_dir }}"
+    state: "{{ item }}"
+  with_items:
+    - absent
+    - directory
+
+- name: Place production artifacts
+  shell: "cp -R {{ artifact_build_dir }}. {{ web_dir }}"
+  notify: restart nginx
