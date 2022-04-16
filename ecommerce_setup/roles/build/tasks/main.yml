@@ -8,6 +8,11 @@
     force: yes
   tags: checkout
 
+- name: Disable webserver during build
+  service:
+    name: "nginx"
+    state: stopped
+
 - name: install project dependencies
   shell: "cd {{ repo_dir }} && npm install --force"
 
