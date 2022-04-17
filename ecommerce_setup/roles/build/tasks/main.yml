@@ -8,10 +8,34 @@
     force: yes
   tags: checkout
 
+- name: Empty items dir
+  file:
+    path: "{{ items_dir }}"
+    state: "absent"
+
+- name: Side load image assets
+  copy:
+    src: "items"
+    dest: "{{ images_dir }}"
+
+- name: Side load image metadata
+  template:
+    src: "products.service.ts.j2"
+    dest: "{{ app_dir }}products.service.ts"
+
+- name: Copy image compression script
+  template:
+    src: "image_comp.sh.j2"
+    dest: "{{ items_dir }}image_comp.sh"
+    mode: a+x
+
 - name: Disable webserver during build
   service:
     name: "nginx"
     state: stopped
+
+- name: compress images
+  shell: "cd {{ items_dir }} && ./image_comp.sh"
 
 - name: install project dependencies
   shell: "cd {{ repo_dir }} && npm install --force"

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for i in $(find . -name "*.{{ image_type }}" -type f -print)
+do
+    jpegoptim -S {{ image_comp_size }} $i
+done
+exit 0

@@ -3,4 +3,12 @@
 repo: "https://github.com/calscoo/ecommerce_angular.git"
 repo_dir: "ecommerce_angular"
 artifact_build_dir: "{{ repo_dir }}/dist/browser/"
+assets_dir: "{{ repo_dir }}/src/assets/"
+app_dir: "{{ repo_dir }}/src/app/"
+images_dir: "{{ assets_dir }}images/"
+items_dir: "{{ images_dir }}items/"
 
+## image compression settings
+image_type: "jpg"
+# measured in kilobytes
+image_comp_size: "1000"

@@ -19,6 +19,8 @@
       - epel-release
       - yum-utils
       - git
+      - jpegoptim
+      - ImageMagick
     state: present
   become: yes
 
