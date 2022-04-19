@@ -23,10 +23,10 @@
     src: "products.service.ts.j2"
     dest: "{{ app_dir }}products.service.ts"
 
-- name: Copy image compression script
+- name: Ensure image processing script exists
   template:
-    src: "image_comp.sh.j2"
-    dest: "{{ items_dir }}image_comp.sh"
+    src: "image_processing.sh.j2"
+    dest: "{{ items_dir }}image_processing.sh"
     mode: a+x
 
 - name: Disable webserver during build
@@ -34,8 +34,8 @@
     name: "nginx"
     state: stopped
 
-- name: compress images
-  shell: "cd {{ items_dir }} && ./image_comp.sh"
+- name: process images
+  shell: "cd {{ items_dir }} && ./image_processing.sh"
 
 - name: install project dependencies
   shell: "cd {{ repo_dir }} && npm install --force"

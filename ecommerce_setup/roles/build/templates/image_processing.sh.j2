@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for i in $(find . -name "*.{{ image_type }}" -type f -print | cut -f 2 -d '.' | cut -f 2 -d '/')
+do
+    sudo convert $i.{{ image_type }} -crop {{ image_division }}@ +repage +adjoin $i.%d.{{ image_type }}
+done
+for i in $(find . -name "*.{{ image_type }}" -type f -print)
+do
+    jpegoptim -S {{ image_comp_size }} $i
+done
+exit 0

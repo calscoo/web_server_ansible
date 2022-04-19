@@ -11,4 +11,5 @@ items_dir: "{{ images_dir }}items/"
 ## image compression settings
 image_type: "jpg"
 # measured in kilobytes
-image_comp_size: "1000"
+image_comp_size: "500"
+image_division: "5x5"
