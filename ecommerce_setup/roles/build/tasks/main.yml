@@ -1,5 +1,17 @@
 ---
 
+- name: catalog_batch_upsert
+  uri:
+    url: "https://connect.squareup.com/v2/catalog/batch-upsert"
+    method: POST
+    body: "{{ lookup('file','catalog_batch_upsert.json') }}"
+    body_format: json
+    headers:
+      Square-Version: "2022-03-16"
+      Authorization: "Bearer {{ sqaure_access_token }}"
+      Content-Type: "application/json"
+  become: yes
+
 - name: Git checkout
   ansible.builtin.git:
     repo: "{{ repo }}"
