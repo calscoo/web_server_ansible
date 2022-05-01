@@ -1,0 +1,36 @@
+{
+  "batches": [
+    {
+      "objects": [
+        {% for image in images %}
+        {
+          "type": "ITEM",
+          "id": "#{{ image.name }}",
+          "present_at_all_locations": true,
+          "item_data": {
+            "name": "{{ image.name }}",
+            "description": "{{ image.description }}",
+            "variations": [
+              {
+                "type": "ITEM_VARIATION",
+                "id": "#{{ image.name }}_archival",
+                "present_at_all_locations": true,
+                "item_variation_data": {
+                  "item_id": "#{{ image.name }}",
+                  "name": "Archival",
+                  "pricing_type": "FIXED_PRICING",
+                  "price_money": {
+                    "amount": {{ image.price }},
+                    "currency": "USD"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {% endfor %}
+      ]
+    }
+  ],
+  "idempotency_key": "{{ 9999999999999999999999 | random | to_uuid }}"
+}

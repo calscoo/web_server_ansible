@@ -13,3 +13,16 @@ image_type: "jpg"
 # measured in kilobytes
 image_comp_size: "500"
 image_division: "5x5"
+
+"images": [
+  {
+    "name": art1,
+    "description": art1 desc,
+    "price": 350,
+  },
+  {
+    "name": art2,
+    "description": art2 desc,
+    "price": 450,
+  },
+]
