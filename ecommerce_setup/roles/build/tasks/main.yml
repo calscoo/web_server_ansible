@@ -4,7 +4,7 @@
   uri:
     url: "https://connect.squareup.com/v2/catalog/batch-upsert"
     method: POST
-    body: "{{ lookup('template','catalog_batch_upsert.j2') }}"
+    body: "{{ lookup('template','catalog_batch_upsert.json.j2') }}"
     body_format: json
     headers:
       Square-Version: "2022-03-16"
