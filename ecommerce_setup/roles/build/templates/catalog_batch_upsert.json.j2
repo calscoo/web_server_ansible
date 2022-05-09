@@ -2,25 +2,25 @@
   "batches": [
     {
       "objects": [
-        {% for image in images %}
+        {% for item in items if item.name not in squareup_item_names %}
         {
           "type": "ITEM",
-          "id": "#{{ image.name }}",
+          "id": "#{{ item.name }}",
           "present_at_all_locations": true,
           "item_data": {
-            "name": "{{ image.name }}",
-            "description": "{{ image.description }}",
+            "name": "{{ item.name }}",
+            "description": "{{ item.description }}",
             "variations": [
               {
                 "type": "ITEM_VARIATION",
-                "id": "#{{ image.name }}_archival",
+                "id": "#{{ item.name }}_archival",
                 "present_at_all_locations": true,
                 "item_variation_data": {
-                  "item_id": "#{{ image.name }}",
-                  "name": "Archival",
+                  "item_id": "#{{ item.name }}",
+                  "name": "{{ item.type }}",
                   "pricing_type": "FIXED_PRICING",
                   "price_money": {
-                    "amount": {{ image.price }},
+                    "amount": {{ "%.0f" | format( item.price * 100 ) }},
                     "currency": "USD"
                   }
                 }

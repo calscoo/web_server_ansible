@@ -1,16 +1,36 @@
 ---
 
-- name: catalog_batch_upsert
+- name: Get squareup items
+  uri:
+    url: "https://connect.squareup.com/v2/catalog/list"
+    method: GET
+    headers: "{{ square_curl_headers }}"
+  register: squareup_item_result
+  tags: upsert
+
+- name: Set squareup_item_names
+  set_fact:
+    squareup_item_names: "{{ squareup_item_names + [item.item_data.name] }}"
+  with_items: "{{ squareup_item_result.json.objects }}"
+  when: "{{ item.type == 'ITEM' }}"
+  no_log: true
+  tags: upsert
+
+- name: Set item_names
+  set_fact:
+    item_names: "{{ item_names + [item.name] }}"
+  with_items: "{{ items }}"
+  no_log: true
+  tags: upsert
+
+- name: Post catalog_batch_upsert
   uri:
     url: "https://connect.squareup.com/v2/catalog/batch-upsert"
     method: POST
     body: "{{ lookup('template','catalog_batch_upsert.json.j2') }}"
     body_format: json
-    headers:
-      Square-Version: "2022-03-16"
-      Authorization: "Bearer {{ sqaure_access_token }}"
-      Content-Type: "application/json"
-  become: yes
+    headers: "{{ square_curl_headers }}"
+  when: "{{ (item_names | difference(squareup_item_names)) | length }}"
   tags: upsert
 
 - name: Git checkout
@@ -23,13 +43,13 @@
 
 - name: Empty items dir
   file:
-    path: "{{ items_dir }}"
+    path: "{{ items_full_dir }}"
     state: "absent"
 
 - name: Side load image assets
   copy:
     src: "items"
-    dest: "{{ images_dir }}"
+    dest: "{{ images_full_dir }}"
 
 - name: Side load image metadata
   template:
@@ -39,7 +59,7 @@
 - name: Ensure image processing script exists
   template:
     src: "image_processing.sh.j2"
-    dest: "{{ items_dir }}image_processing.sh"
+    dest: "{{ items_full_dir }}image_processing.sh"
     mode: a+x
 
 - name: Disable webserver during build
@@ -47,13 +67,13 @@
     name: "nginx"
     state: stopped
 
-- name: process images
-  shell: "cd {{ items_dir }} && ./image_processing.sh"
+- name: Process images
+  shell: "cd {{ items_full_dir }} && ./image_processing.sh"
 
-- name: install project dependencies
+- name: Install project dependencies
   shell: "cd {{ repo_dir }} && npm install --force"
 
-- name: build production artifacts
+- name: Build production artifacts
   shell: "cd {{ repo_dir }} && ng build --prod"
 
 - name: Create empty nginx web directory

@@ -1,0 +1,17 @@
+---
+
+squareup_item_names: []
+item_names: []
+
+"items":
+  - "id": 1
+    "name": "art1"
+    "file_name": "test"
+    "description": "art1 desc"
+    "price": 3.50
+    "type": "Archival"
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4

@@ -9,34 +9,21 @@ export class ProductsService {
   }
 
   products = [
+	{% for item in items %}
     {
-      "id": "1",
-      "name": "1",
-      "price": 99.99,
-      "description": "description",
-      "image": "assets/images/items/item1.jpg",
+      "id": "{{ item.id }}",
+      "name": "{{ item.name }}",
+      "price": {{ "%.2f" | format( item.price ) }},
+      "description": "{{ item.description }}",
+      "image": "{{ images_dir }}{{ item.file_name }}.jpg",
       "image_gallery": [
-        "assets/images/items/item1.jpg",
-        "assets/images/items/item1.7.jpg",
-        "assets/images/items/item1.17.jpg",
-        "assets/images/items/item1.4.jpg",
-        "assets/images/items/item1.22.jpg",
+      	"{{ images_dir }}{{ item.file_name }}.jpg",
+		{% for crop in item.crops %}
+      	"{{ images_dir }}{{ item.file_name }}.{{ crop }}.jpg",
+		{% endfor %}
       ],
     },
-    {
-      "id": "2",
-      "name": "2",
-      "price": 99.99,
-      "description": "description",
-      "image": "assets/images/items/item2.jpg",
-      "image_gallery": [
-        "assets/images/items/item2.jpg",
-        "assets/images/items/item2.11.jpg",
-        "assets/images/items/item2.10.jpg",
-        "assets/images/items/item2.6.jpg",
-        "assets/images/items/item2.19.jpg",
-      ],
-    }
+	{% endfor %}
   ];
 
   getProducts(){
