@@ -1,5 +1,6 @@
 ---
 
+new_squareup_item_names: []
 squareup_item_names: []
 item_names: []
 
@@ -8,6 +9,17 @@ item_names: []
     "name": "art1"
     "file_name": "test"
     "description": "art1 desc"
+    "price": 3.50
+    "type": "Archival"
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 2
+    "name": "art2"
+    "file_name": "test"
+    "description": "art2 desc"
     "price": 3.50
     "type": "Archival"
     "crops":
