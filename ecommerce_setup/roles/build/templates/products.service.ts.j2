@@ -15,6 +15,7 @@ export class ProductsService {
       "name": "{{ item.name }}",
       "price": {{ "%.2f" | format( item.price ) }},
       "description": "{{ item.description }}",
+      "squareup_url": "{{ item.squareup_url }}",
       "image": "{{ images_dir }}{{ item.file_name }}.jpg",
       "image_gallery": [
       	"{{ images_dir }}{{ item.file_name }}.jpg",
