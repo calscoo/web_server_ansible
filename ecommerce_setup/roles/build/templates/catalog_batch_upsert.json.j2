@@ -11,20 +11,22 @@
             "name": "{{ item.name }}",
             "description": "{{ item.description }}",
             "variations": [
+              {% for variation in item.variations %}
               {
                 "type": "ITEM_VARIATION",
-                "id": "#{{ item.name }}_archival",
+                "id": "#{{ item.name }}_{{ variation.type }}",
                 "present_at_all_locations": true,
                 "item_variation_data": {
                   "item_id": "#{{ item.name }}",
-                  "name": "{{ item.type }}",
+                  "name": "{{ variation.type }} ({{ variation.size }} inches)",
                   "pricing_type": "FIXED_PRICING",
                   "price_money": {
-                    "amount": {{ "%.0f" | format( item.price * 100 ) }},
+                    "amount": {{ "%.0f" | format( variation.price * 100 ) }},
                     "currency": "USD"
                   }
                 }
-              }
+              },
+              {% endfor %}
             ]
           }
         },

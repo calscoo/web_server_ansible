@@ -13,15 +13,23 @@ export class ProductsService {
     {
       "id": "{{ item.id }}",
       "name": "{{ item.name }}",
-      "price": {{ "%.2f" | format( item.price ) }},
       "description": "{{ item.description }}",
       "squareup_url": "{{ item.squareup_url }}",
-      "image": "{{ images_dir }}{{ item.file_name }}.jpg",
+      "image": "{{ images_dir }}{{ item.name }}.jpg",
       "image_gallery": [
-      	"{{ images_dir }}{{ item.file_name }}.jpg",
+      	"{{ images_dir }}{{ item.name }}.jpg",
 		{% for crop in item.crops %}
-      	"{{ images_dir }}{{ item.file_name }}.{{ crop }}.jpg",
+      	"{{ images_dir }}{{ item.name }}.{{ range(0, 25) | random }}.jpg",
 		{% endfor %}
+      ],
+      "variations": [
+        {% for variation in item.variations %}
+        {
+          "size": "{{ variation.size }}",
+          "type": "{{ variation.type }}",
+          "price": {{ "%.2f" | format( variation.price ) }},
+        },
+        {% endfor %}
       ],
     },
 	{% endfor %}

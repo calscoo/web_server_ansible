@@ -23,11 +23,6 @@
   no_log: true
   tags: upsert
 
-- name: Set new_squareup_item_names
-  set_fact:
-    new_squareup_item_names: "{{ (item_names | difference(squareup_item_names)) }}"
-  tags: upsert
-
 - name: Post catalog_batch_upsert
   uri:
     url: "https://connect.squareup.com/v2/catalog/batch-upsert"
@@ -35,13 +30,7 @@
     body: "{{ lookup('template','catalog_batch_upsert.json.j2') }}"
     body_format: json
     headers: "{{ square_curl_headers }}"
-  when: "{{ new_squareup_item_names | length }}"
-  tags: upsert
-
-- name: loop prompt
-  pause:
-    prompt: "Visit https://squareup.com/dashboard/items/library/ and turn on the sales link for {{ item }}"
-  with_items: "{{ new_squareup_item_names }}"
+  when: "{{ (item_names | difference(squareup_item_names)) | length }}"
   tags: upsert
 
 - name: Git checkout

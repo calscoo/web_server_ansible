@@ -1,27 +1,196 @@
 ---
 
-new_squareup_item_names: []
 squareup_item_names: []
 item_names: []
 
 "items":
   - "id": 1
-    "name": "art1"
-    "file_name": "test"
-    "description": "art1 desc"
-    "price": 3.50
-    "type": "Archival"
+    "name": "bloom"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/RHJMEL6FVXN6ISLMLGOXV6MA"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
     "crops":
       - 1
       - 2
       - 3
       - 4
   - "id": 2
-    "name": "art2"
-    "file_name": "test"
-    "description": "art2 desc"
-    "price": 3.50
-    "type": "Archival"
+    "name": "commencement"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/DQZXKXLWQ7ADWN3BOC5Q6G7P"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 3
+    "name": "lodged"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/MWZIYN4VGJYW6DEIXD7XFO5R"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 4
+    "name": "glennhill"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/NJDZKLWBLATMRS7HYJOJOPES"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 5
+    "name": "first"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/WZUYWX6V7EVPDPIEH33ZT6HO"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 6
+    "name": "flambent"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/YEFHWYOOS5JX54IHDRUQ23AP"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 7
+    "name": "edgeley"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/PVVNIBV5H5KYASI7CY5TUJST"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 8
+    "name": "delta"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/ZF2N3Y4GFUQ6H7QO7HHZW5RZ"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 9
+    "name": "marriott"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/KF2MSPC2NOELPUMG6GBTO2CT"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 10
+    "name": "pastelwell"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/WXFDNN5TC6IRFDJZMN5A5NMG"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 11
+    "name": "pillars"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/QKMJQHKKYMD6LP32G3FYD34L"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
+    "crops":
+      - 1
+      - 2
+      - 3
+      - 4
+  - "id": 12
+    "name": "sundog"
+    "description": ""
+    "squareup_url": "https://checkout.square.site/merchant/ML8SW53S7WFVZ/checkout/WGJD4AEI55M5J662VLUYDLCP"
+    "variations":
+      - "size": "23 x 19"
+        "type": "medium"
+        "price": 150.00
+      - "size": "33 x 27"
+        "type": "large"
+        "price": 250.00
     "crops":
       - 1
       - 2

@@ -1,11 +1,8 @@
 #!/bin/bash
 
-for i in $(find . -name "*.{{ image_type }}" -type f -print | cut -f 2 -d '.' | cut -f 2 -d '/')
+for i in $(find . -name "*.jpg" -type f -print | cut -f 2 -d '.' | cut -f 2 -d '/')
 do
-    sudo convert $i.{{ image_type }} -crop {{ image_division }}@ +repage +adjoin $i.%d.{{ image_type }}
+    sudo convert $i.jpg -crop {{ image_division }}@ +repage +adjoin $i.%d.jpg
 done
-for i in $(find . -name "*.{{ image_type }}" -type f -print)
-do
-    jpegoptim -S {{ image_comp_size }} $i
-done
+sudo mogrify -sampling-factor 4:2:0 -strip -quality {{ image_quality }} -resize {{ image_max_size }}x{{ image_max_size }} -interlace JPEG -colorspace RGB *.jpg
 exit 0
