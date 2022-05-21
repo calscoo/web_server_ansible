@@ -12,7 +12,7 @@
 
 - name: Create empty nginx web directory
   file:
-    path: "{{ web_dir }}"
+    path: "/usr/local/nginx/{{ server_name }}/html/"
     state: "{{ item }}"
   with_items:
     - absent
