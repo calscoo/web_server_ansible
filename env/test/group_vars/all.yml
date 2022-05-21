@@ -1,6 +1,0 @@
----
-
-server_name: "calebolson.media"
-contact_email: "calebolson.media@gmail.com"
-user: "ec2-user"
-web_dir: "/usr/local/nginx/{{ server_name }}/html/"

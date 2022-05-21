@@ -4,7 +4,7 @@
     name: nginx
     state: present
 
-- name: Copy nginx configuration for ecommerce
+- name: Copy nginx configuration
   template:
     src: "nginx.conf.j2"
     dest: "{{ nginx_conf_dir }}"
