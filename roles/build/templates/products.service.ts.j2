@@ -11,16 +11,16 @@ export class ProductsService {
   products = [
 	{% for item in items %}
     {
-      "id": "{{ item.id }}",
+      "id": "{{ loop.index }}",
       "name": "{{ item.name }}",
       "description": "{{ item.description }}",
       "squareup_url": "{{ item.squareup_url }}",
       "image": "{{ images_dir }}{{ item.name }}.jpg",
       "image_gallery": [
       	"{{ images_dir }}{{ item.name }}.jpg",
-		{% for crop in item.crops %}
-      	"{{ images_dir }}{{ item.name }}.{{ range(0, 25) | random }}.jpg",
-		{% endfor %}
+      	"{{ images_dir }}{{ item.name }}.{{ range(3, 6) | random }}.jpg",
+      	"{{ images_dir }}{{ item.name }}.{{ range(0, 3) | random }}.jpg",
+      	"{{ images_dir }}{{ item.name }}.{{ range(6, 9) | random }}.jpg",
       ],
       "variations": [
         {% for variation in item.variations %}

@@ -14,6 +14,6 @@ square_curl_headers:
   Authorization: "Bearer {{ square_access_token }}"
   Content-Type: "application/json"
 
-image_division: "5x5"
+image_division: "3x3"
 image_max_size: "1000"
 image_quality: "70"
