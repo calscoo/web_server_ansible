@@ -16,4 +16,4 @@
     state: "{{ item }}"
   with_items:
     - absent
-    - director
+    - directory

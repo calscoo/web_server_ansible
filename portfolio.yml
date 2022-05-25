@@ -1,0 +1,11 @@
+---
+
+- hosts: portfolio
+  vars:
+    server_name: "calebolson.space"
+    contact_email: "scoutscott13@gmail.com"
+  roles:
+    - { role: dependencies, become: yes, tags: dependencies }
+    - { role: ssh_key, become: no, tags: ssh_key }
+    - { role: certbot, become: yes, tags: certbot }
+    - { role: nginx, become: yes, tags: nginx }

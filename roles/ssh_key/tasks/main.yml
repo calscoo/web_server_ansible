@@ -1,0 +1,20 @@
+---
+
+- name: Set ssh_public_key
+  authorized_key:
+    user: ec2-user
+    state: present
+    key: "{{ ssh_public_key }}"
+  become: no
+
+- name: Set ssh_private_key
+  shell: |
+    echo -e "{{ ssh_private_key }}" >> /home/ec2-user/.ssh/id_rsa
+  args:
+    creates: "/home/ec2-user/.ssh/id_rsa"
+  become: no
+
+- name: Set ssh_private_key permission
+  file:
+    path: "/home/ec2-user/.ssh/id_rsa"
+    mode: "0600"

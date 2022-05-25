@@ -1,0 +1,5 @@
+---
+
+aws_secret: "{{ lookup('aws_secret', 'prod/secret') }}"
+ssh_public_key: "{{ aws_secret.ssh_public_key }}"
+ssh_private_key: "{{ aws_secret.ssh_private_key }}"

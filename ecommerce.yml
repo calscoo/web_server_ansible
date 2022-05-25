@@ -1,7 +1,11 @@
 ---
 
-- hosts: web_server
+- hosts: ecommerce
+  vars:
+    server_name: "calebolson.media"
+    contact_email: "calebolson.media@gmail.com"
   roles:
     - { role: dependencies, become: yes, tags: dependencies }
+    - { role: ssh_key, become: no, tags: ssh_key }
     - { role: certbot, become: yes, tags: certbot }
     - { role: nginx, become: yes, tags: nginx }
