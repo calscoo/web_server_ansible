@@ -9,6 +9,7 @@
     src: "nginx.conf.j2"
     dest: "{{ nginx_conf_dir }}"
   notify: restart nginx
+  tags: template
 
 - name: Create empty nginx web directory
   file:
